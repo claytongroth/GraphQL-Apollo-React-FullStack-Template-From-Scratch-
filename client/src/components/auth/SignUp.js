@@ -30,6 +30,8 @@ class Signup extends React.Component{
             await this.props.refetch();
             this.clearState();
             this.props.history.push('/');
+        }).catch((err)=>{
+            console.log({err})
         })
     }
     validateForm = () =>{

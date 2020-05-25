@@ -28,6 +28,8 @@ class Signin extends React.Component{
             await this.props.refetch();
             this.clearState();
             this.props.history.push('/');
+        }).catch((err)=>{
+            console.log({err})
         })
     }
     validateForm = () =>{
@@ -40,9 +42,8 @@ class Signin extends React.Component{
         return(
             <div className = "App">
                 <h2 className="form">Sign In</h2>
-                <Mutation mutation={SIGNIN_USER} variables={{username, password}}>
+                <Mutation mutation={SIGNIN_USER} variables={{username, password}} errorPolicy="all">
                     {(signInUser, {data, loading, error})=> {
-                        console.log({error})
                         return (
                             <form className="form" onSubmit={e => this.handleSubmit(e, signInUser)} >
                                 <input value={username} onChange={this.handleChange} type="text" name="username" placeholder="Username"></input>
